@@ -9,19 +9,20 @@
     tools:context=".MainActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="48dp"
-                android:layout_height="match_parent">
+                android:layout_marginTop="48dp">
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -60,10 +61,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/darkgrey_bg"
                 android:layout_margin="12dp"
-                android:padding="12dp"
-                android:orientation="vertical">
+                android:background="@drawable/darkgrey_bg"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <TextView
                     android:id="@+id/textView6"
@@ -94,9 +95,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="+1023.54$"
+                        android:textAlignment="viewEnd"
                         android:textColor="@color/green"
-                        android:textStyle="bold"
-                        android:textAlignment="viewEnd"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -106,19 +107,19 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        style = "@android:style/Widget.Button"
-
                         android:id="@+id/button"
+
+                        style="@android:style/Widget.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/grey_bg"
 
-                        android:text="Deposite"
                         android:drawableStart="@drawable/deposite"
                         android:paddingStart="16dp"
+                        android:text="Deposite"
                         android:textColor="@color/white"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -132,8 +133,8 @@
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stock Futures"
                     android:layout_weight="1"
+                    android:text="Stock Futures"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -143,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="See all"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -159,27 +160,133 @@
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Crytpo Activities"
-                android:textColor="@color/white"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:textStyle="bold"/>
+                android:text="Crytpo Activities"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cryptoView"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp"
-                android:clipToPadding="false"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp" />
 
         </LinearLayout>
     </ScrollView>
-<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="100dp"-->
-<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="60dp"-->
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/dark_grey"
+            app:fabCradleMargin="8dp"
+            android:id="@+id/app_bar"
+            app:fabCradleRoundedCornerRadius="50dp"
+            app:fabCradleVerticalOffset="6dp"
+            android:layout_height="60dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bottom_btn1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bottom_btn2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bottom_btn1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bottom_btn3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bottom_btn4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+            
+        </com.google.android.material.bottomappbar.BottomAppBar>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:pointerIcon="wait"
+            android:src="@drawable/qrcode"
+            app:backgroundTint="@color/orange"
+            app:layout_anchor="@id/app_bar"
+            app:maxImageSize="25dp"
+            android:tint="@color/white"
+            />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
