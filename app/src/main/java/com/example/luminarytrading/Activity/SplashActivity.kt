@@ -1,16 +1,11 @@
-package com.example.luminarytrading
+package com.example.luminarytrading.Activity
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.view.inputmethod.InputBinding
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.luminarytrading.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
