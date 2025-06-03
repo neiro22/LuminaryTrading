@@ -9,16 +9,16 @@
 
     <ImageView
         android:id="@+id/logoimg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Ethereum" />
+        app:srcCompat="@drawable/ethereum" />
 
     <TextView
-        android:id="@+id/cyrptoNameTxt"
+        android:id="@+id/StockNameTxt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="@+id/logoimg" />
 
     <TextView
-        android:id="@+id/CryptoPriceTxt"
+        android:id="@+id/StockPriceTxt"
         android:layout_width="54dp"
         android:layout_height="20dp"
         android:text="$2200"
@@ -52,8 +52,8 @@
         android:textColor="@color/green"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/CryptoPriceTxt"
-        app:layout_constraintTop_toBottomOf="@+id/CryptoPriceTxt" />
+        app:layout_constraintStart_toStartOf="@+id/StockPriceTxt"
+        app:layout_constraintTop_toBottomOf="@+id/StockPriceTxt" />
 
     <com.majorik.sparklinelibrary.SparkLineLayout
         android:id="@+id/sparkLineLayout"
