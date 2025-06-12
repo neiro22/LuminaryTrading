@@ -54,10 +54,10 @@
 
     <com.majorik.sparklinelibrary.SparkLineLayout
         android:id="@+id/sparkLineLayout"
-        android:layout_width="90dp"
+        android:layout_width="170dp"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/propertySizeTxt"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/changePercentTxt"
         app:layout_constraintTop_toTopOf="parent"
         app:s_line_color="#fed32c"
@@ -65,24 +65,4 @@
         app:s_marker_background_color="#fed32c"
         app:s_marker_width="8dp" />
 
-    <TextView
-        android:id="@+id/propertySizeTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="0.15"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cryptoNameTxt" />
-
-    <TextView
-        android:id="@+id/propertyAmountTxt"
-        android:layout_width="36dp"
-        android:layout_height="17dp"
-        android:text="$12"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/changePercentTxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/propertySizeTxt" />
 </androidx.constraintlayout.widget.ConstraintLayout>

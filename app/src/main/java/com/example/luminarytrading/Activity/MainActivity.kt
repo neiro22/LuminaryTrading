@@ -38,21 +38,21 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
 
         CryptoList()
-        StockList()
+        //StockList()
 
     }
 
-    private fun StockList() {
-        binding.stockView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-        val domainArrayList = arrayListOf(
-            Model("NASDAQ100", "BTC", 110000.11, 2.1, lineData, 1.1, 0.1),
-            Model("S&P 500", "ETH", 2400.1, 5.2, lineData2, 1.1, 0.1),
-            Model("Dow Jones", "TRX", 661.16, 0.68, lineData3, 1.1, 0.1)
-        )
-
-        binding.stockView.adapter = StockAdapter(domainArrayList)
-    }
+//    private fun StockList() {
+//        binding.stockView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//
+//        val domainArrayList = arrayListOf(
+//            Model("NASDAQ100", "BTC", 110000.11, 2.1, lineData, 1.1, 0.1),
+//            Model("S&P 500", "ETH", 2400.1, 5.2, lineData2, 1.1, 0.1),
+//            Model("Dow Jones", "TRX", 661.16, 0.68, lineData3, 1.1, 0.1)
+//        )
+//
+//        binding.stockView.adapter = StockAdapter(domainArrayList)
+//    }
 
     private fun CryptoList() {
         binding.cryptoView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

@@ -34,8 +34,8 @@ RecyclerView.Adapter<CryptoAdapter.ViewHolder>(){
             cryptoNameTxt.text = item.name
             cryptoPriceTxt.text = "$${formatter.format(item.price)}"
             changePercentTxt.text = "${item.changePercent}%"
-            propertySizeTxt.text = "${item.propertySize}${item.symbol}"
-            propertyAmountTxt.text = "$${formatter.format(item.propertyAmount)}"
+//            propertySizeTxt.text = "${item.propertySize}${item.symbol}"
+//            propertyAmountTxt.text = "$${formatter.format(item.propertyAmount)}"
 
             sparkLineLayout.setData(item.lineData)
 
