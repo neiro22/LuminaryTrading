@@ -1,5 +1,6 @@
 package com.example.luminarytrading.Adapter
 
+import android.content.Intent
 import android.graphics.Color
 import android.icu.text.DecimalFormat
 import android.view.LayoutInflater
@@ -7,10 +8,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.bumptech.glide.Glide
+import com.example.luminarytrading.Activity.DetailCryptoActivity
+import com.example.luminarytrading.Model.CryptoModel
 import com.example.luminarytrading.Model.Model
 import com.example.luminarytrading.databinding.ViewholderCryptoBinding
 
-class CryptoAdapter(private val dataList:ArrayList<Model>):
+class CryptoAdapter(private val dataList:ArrayList<CryptoModel>):
 RecyclerView.Adapter<CryptoAdapter.ViewHolder>(){
 
     private val formatter = DecimalFormat("###,###,###,###.##")
@@ -47,13 +50,18 @@ RecyclerView.Adapter<CryptoAdapter.ViewHolder>(){
             sparkLineLayout.sparkLineColor = changeColor
 
             val drawableResourceId = holder.itemView.context.resources.getIdentifier(
-                item.name, "drawable", holder.itemView.context.packageName
+                item.SymbolLogo, "drawable", holder.itemView.context.packageName
             )
 
             Glide.with(holder.itemView.context)
                 .load(drawableResourceId)
                 .into(logoImg)
 
+            holder.itemView.setOnClickListener {
+                val intent = Intent(holder.itemView.context,DetailCryptoActivity::class.java)
+                intent.putExtra("object", item)
+                holder.itemView.context.startActivity(intent)
+            }
         }
 
     }

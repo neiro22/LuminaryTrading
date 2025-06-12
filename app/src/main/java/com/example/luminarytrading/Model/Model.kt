@@ -1,6 +1,6 @@
 package com.example.luminarytrading.Model
 
-import android.content.pm.PackageManager.Property
+import java.io.Serializable
 
 public class Model (
     var name: String,
@@ -11,4 +11,4 @@ public class Model (
     var propertyAmount:Double,
     var propertySize:Double,
 
-)
+): Serializable
