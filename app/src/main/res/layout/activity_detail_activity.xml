@@ -467,12 +467,12 @@
 
                     </LinearLayout>
 
-                    <Spinner
-                        android:id="@+id/orderPositionBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/semi_black_bg" />
+<!--                    <Spinner-->
+<!--                        android:id="@+id/orderPositionBtn"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="48dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:background="@drawable/semi_black_bg" />-->
 
                     <EditText
                         android:id="@+id/priceEdt"
@@ -483,7 +483,7 @@
                         android:ems="10"
                         android:inputType="number"
                         android:background="@drawable/semi_black_bg"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="25dp"
                         android:hint="Price"
                         android:textAlignment="center"
                         android:textSize="16sp"
@@ -526,26 +526,12 @@
                             app:srcCompat="@drawable/minus" />
                     </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/totalEdt"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:textColorHint="@color/white"
-                        android:textColor="@color/white"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:background="@drawable/semi_black_bg"
-                        android:layout_marginTop="12dp"
-                        android:hint="Total"
-                        android:textAlignment="center"
-                        android:textSize="16sp"
-                        />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/sendOrderBtn"
                         style="@android:style/Widget.Button"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="25dp"
                         android:background="@drawable/green_bg"
                         android:text="Buy"
                         android:textColor="@color/white"
@@ -715,6 +701,7 @@
                         android:textStyle="bold"/>
                 </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

@@ -34,19 +34,8 @@ class DetailCryptoActivity : AppCompatActivity() {
 
         getBundle()
         SerVariable()
-        orderType()
     }
 
-    private fun orderType() {
-        val adapter = ArrayAdapter(
-            this,
-            R.layout.spinner_item,
-            listOf("Лимитный Ордер","Маркет Ордер")
-        )
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.orderPositionBtn.adapter = adapter
-    }
 
     private fun SerVariable() {
         binding.BuyPositionBtn.setOnClickListener {

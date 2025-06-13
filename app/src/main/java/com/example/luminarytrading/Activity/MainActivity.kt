@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.luminarytrading.Adapter.CryptoAdapter
@@ -11,6 +12,13 @@ import com.example.luminarytrading.Adapter.StockAdapter
 import com.example.luminarytrading.Model.CryptoModel
 import com.example.luminarytrading.Model.Model
 import com.example.luminarytrading.databinding.ActivityMainBinding
+import com.example.luminarytrading.R
+
+import android.content.Intent
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.core.view.WindowCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +46,31 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
 
         CryptoList()
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    // Уже на MainActivity
+                    true
+                }
+                R.id.nav_study -> {
+                    startActivity(Intent(this, StudyActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
+                    true
+                }
+                R.id.nav_news -> {
+                    startActivity(Intent(this, NewsActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
+                    true
+                }
+                else -> false
+            }
+        }
+
         //StockList()
 
     }
