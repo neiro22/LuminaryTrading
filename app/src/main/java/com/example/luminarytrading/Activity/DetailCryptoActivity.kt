@@ -2,8 +2,11 @@ package com.example.luminarytrading.Activity
 
 import android.icu.text.DecimalFormat
 import android.os.Bundle
+import android.view.Gravity
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,6 +22,7 @@ class DetailCryptoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailActivityBinding
     private lateinit var item:CryptoModel
     private var formatter: DecimalFormat = DecimalFormat("###,###,###.##")
+    private var isBuyMode = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,12 +37,13 @@ class DetailCryptoActivity : AppCompatActivity() {
         )
 
         getBundle()
-        SerVariable()
+        setupListeners()
     }
 
-
-    private fun SerVariable() {
+    private fun setupListeners() {
+        // Переключение между режимами покупки/продажи
         binding.BuyPositionBtn.setOnClickListener {
+            isBuyMode = true
             binding.apply {
                 BuyPositionBtn.setBackgroundResource(R.drawable.green_bg)
                 sellPositionBtn.setBackgroundResource(R.drawable.semi_black_bg)
@@ -48,6 +53,7 @@ class DetailCryptoActivity : AppCompatActivity() {
         }
 
         binding.sellPositionBtn.setOnClickListener {
+            isBuyMode = false
             binding.apply {
                 BuyPositionBtn.setBackgroundResource(R.drawable.semi_black_bg)
                 sellPositionBtn.setBackgroundResource(R.drawable.red_bg)
@@ -56,28 +62,79 @@ class DetailCryptoActivity : AppCompatActivity() {
             }
         }
 
+        // Кнопки изменения количества
         binding.plusAmountBtn.setOnClickListener {
-            if(binding.amountEdt.text.isEmpty()){
-                binding.amountEdt.setText("0")
-            }
-            var n:Double=binding.amountEdt.text.toString().toDouble()
-            n+=1
-            binding.amountEdt.setText(n.toString())
+            val currentAmount = binding.amountEdt.text.toString().toDoubleOrNull() ?: 0.0
+            binding.amountEdt.setText("%.4f".format(currentAmount + 0.001))
         }
 
         binding.minusAmountBtn.setOnClickListener {
-            if(binding.amountEdt.text.isEmpty()){
-                binding.amountEdt.setText("0")
-            }
-            var n:Double=binding.amountEdt.text.toString().toDouble()
-            if (n>0){
-                n-=1
-                binding.amountEdt.setText(n.toString())
+            val currentAmount = binding.amountEdt.text.toString().toDoubleOrNull() ?: 0.0
+            if (currentAmount > 0) {
+                binding.amountEdt.setText("%.4f".format(currentAmount - 0.001))
             }
         }
 
+        // Обработка отправки ордера
+        binding.sendOrderBtn.setOnClickListener {
+            processOrder()
+        }
     }
 
+    private fun processOrder() {
+        val priceText = binding.priceEdt.text.toString()
+        val amountText = binding.amountEdt.text.toString()
+
+        // Проверка введенных данных
+        if (priceText.isEmpty() || amountText.isEmpty()) {
+            showToast("Please enter price and amount")
+            return
+        }
+
+        val price = priceText.toDoubleOrNull()
+        val amount = amountText.toDoubleOrNull()
+
+        if (price == null || amount == null || price <= 0 || amount <= 0) {
+            showToast("Invalid price or amount")
+            return
+        }
+
+        // Очистка полей
+        binding.priceEdt.text.clear()
+        binding.amountEdt.text.clear()
+
+        // Показать уведомление об успехе
+        val action = if (isBuyMode) "bought" else "sold"
+        val message = "Successfully $action ${"%.4f".format(amount)} ${item.symbol} at ${"%.2f".format(price)}"
+        showSuccessNotification(message)
+
+        // Здесь можно добавить логику обработки ордера
+        // processOrderLogic(price, amount)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showSuccessNotification(message: String) {
+        // Создаем кастомное уведомление
+        val inflater = layoutInflater
+        val layout = inflater.inflate(
+            R.layout.custom_notification,
+            findViewById(R.id.custom_notification_container)
+        )
+
+        // Настраиваем текст
+        val text = layout.findViewById<TextView>(R.id.notification_text)
+        text.text = message
+
+        // Создаем и настраиваем Toast
+        val toast = Toast(applicationContext)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 100)
+        toast.show()
+    }
     private fun getBundle() {
         item = intent.getSerializableExtra("object") as CryptoModel
 

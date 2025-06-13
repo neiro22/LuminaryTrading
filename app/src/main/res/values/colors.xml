@@ -7,4 +7,6 @@
     <color name="green">#12c737</color>
     <color name="red">#ff0000</color>
     <color name="orange">#FF4A00</color>
+    <color name="notification_success">#4CAF50</color>
+    <color name="notification_error">#F44336</color>
 </resources>
