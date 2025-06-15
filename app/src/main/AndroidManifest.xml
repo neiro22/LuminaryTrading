@@ -19,7 +19,7 @@
             android:name=".Activity.itemActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.NewsActivity"
+            android:name=".Activity.GiftsActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.StudyActivity"

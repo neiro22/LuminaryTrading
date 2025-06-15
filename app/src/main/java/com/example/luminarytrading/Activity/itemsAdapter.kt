@@ -17,7 +17,7 @@ class ItemsAdapter(var items : List<item>, var context: Context) : RecyclerView.
         val image: ImageView = view.findViewById(R.id.item_list_image)
         val title: TextView = view.findViewById(R.id.item_list_title)
         val desc: TextView = view.findViewById(R.id.item_list_desc)
-        val price: TextView = view.findViewById(R.id.item_list_price)
+        val level: TextView = view.findViewById(R.id.item_list_level)
         val btn: Button = view.findViewById(R.id.item_list_button)
     }
 
@@ -33,7 +33,13 @@ class ItemsAdapter(var items : List<item>, var context: Context) : RecyclerView.
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.title.text = items[position].title
         holder.desc.text = items[position].desc
-        holder.price.text = items[position].price.toString() + "$"
+        if (items[position].level == "Новичок"){
+            holder.level.text = "\uD83D\uDFE2" + items[position].level
+        } else if(items[position].level == "Опытный"){
+            holder.level.text = "\uD83D\uDFE1" + items[position].level
+        } else{
+            holder.level.text = "\uD83D\uDD34" + items[position].level
+        }
 
         val image_id = context.resources.getIdentifier(
             items[position].image,

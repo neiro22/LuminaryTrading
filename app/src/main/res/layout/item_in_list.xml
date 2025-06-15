@@ -10,10 +10,10 @@
 
     <ImageView
         android:id="@+id/item_list_image"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/beginner" />
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/beginners_1" />
 
     <TextView
         android:id="@+id/item_list_title"
@@ -32,10 +32,11 @@
         android:paddingVertical="10dp"
         android:paddingHorizontal="20dp"
         android:textSize="17sp"
+        android:textStyle="bold"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/item_list_price"
+        android:id="@+id/item_list_level"
         android:paddingVertical="10dp"
         android:paddingHorizontal="20dp"
         android:textSize="20sp"

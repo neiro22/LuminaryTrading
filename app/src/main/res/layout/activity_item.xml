@@ -5,40 +5,49 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/grey"
     tools:context=".Activity.itemActivity">
 
-    <LinearLayout
+    <!-- Оборачиваем контент в ScrollView -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
 
-        <TextView
-            android:id="@+id/item_list_title_one"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey"
-            android:paddingHorizontal="30dp"
-            android:paddingVertical="20dp"
-            android:text="TextView"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/item_list_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/grey"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp"
-            android:text="TextVdiew"
-            android:textColor="@color/white"
-            android:textSize="17sp" />
+            <TextView
+                android:id="@+id/item_list_title_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grey"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="20dp"
+                android:layout_marginTop="32dp"
+                android:text="Заголовок статьи"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/item_list_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grey"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:text="Очень длинная статья... (много текста)"
+                android:textColor="@color/white"
+                android:gravity="start|top" />
+        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
+    <!-- Нижняя навигация -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -50,6 +59,6 @@
         app:itemTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

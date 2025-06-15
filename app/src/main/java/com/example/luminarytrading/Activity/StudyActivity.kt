@@ -2,11 +2,7 @@ package com.example.luminarytrading.Activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luminarytrading.R
@@ -33,7 +29,7 @@ class StudyActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_news -> {
-                    startActivity(Intent(this, NewsActivity::class.java))
+                    startActivity(Intent(this, GiftsActivity::class.java))
                     overridePendingTransition(0, 0)
                     finish()
                     true
@@ -44,53 +40,90 @@ class StudyActivity : AppCompatActivity() {
 
         val itemsList: RecyclerView = findViewById(R.id.itemsList)
 
-        val items = arrayListOf<item>()
-        val beginner : String = "Узнай, что такое криптовалюта, зачем она нужна и как с ней безопасно обращаться. Подходит для тех, кто впервые сталкивается с этой темой.\n" +
-                "\n" +
-                "Ключевые темы:\n" +
-                "\n" +
-                "Что такое криптовалюта и блокчейн — простыми словами\n" +
-                "\n" +
-                "Разница между Bitcoin и Ethereum\n" +
-                "\n" +
-                "Как создать криптокошелёк и где хранить монеты\n" +
-                "\n" +
-                "Как купить криптовалюту и не попасть на мошенников\n"
-
-        val advanced : String = "Погружаемся глубже: разберёмся, как работает блокчейн, как зарабатывать с помощью крипты и какие технологии стоят за известными проектами.\n" +
-                "Ключевые темы:\n" +
-                "\n" +
-                "Как работает майнинг и стейкинг\n" +
-                "\n" +
-                "Смарт-контракты и децентрализованные приложения (dApps)\n" +
-                "\n" +
-                "Децентрализованные биржи (DEX) и обмен токенов\n" +
-                "\n" +
-                "Основы анализа рынка и управления рисками\n"
-
-
-        val pro : String = "Разбираем продвинутые стратегии, анализируем проекты и используем профессиональные инструменты. Подходит для тех, кто уже торгует или участвует в криптопроектах.\n" +
-                "\n" +
-                "Ключевые темы:\n" +
-                "\n" +
-                "Продвинутый DeFi: лендинг, фарминг, протоколы ликвидности\n" +
-                "\n" +
-                "NFT, DAO и токеномика\n" +
-                "\n" +
-                "Инструменты анализа блокчейна и портфеля\n" +
-                "\n" +
-                "Безопасность: аппаратные кошельки, мультиподписи, анонимность\n"
-
-        items.add(item(1, "beginner", "\uD83D\uDFE2 Новичок", "Начни сейчас", beginner, 5000))
-
-        items.add(item(2, "advanced", "\uD83D\uDFE1 Недавно в крипте", "Не останавливайся, это только начало", advanced, 7000))
-
-        items.add(item(3, "pro", "\uD83D\uDD34 Опытный", "Продолжай расти", pro, 9000))
+        val items = createStudyItems().toMutableList()
 
 
         itemsList.layoutManager = LinearLayoutManager(this)
         itemsList.adapter = ItemsAdapter(items, this)
 
 
+    }
+
+    private fun createStudyItems(): List<item> {
+        return listOf(
+            item(
+                id = 1,
+                image = "beginners_1",
+                title = "Что такое спотовый рынок и как на нем торговать?",
+                desc = "Торговля",
+                text = AssetReader.readTextFile(this, "beginner1.txt"),
+                level = "Новичок"
+            ),
+            item(
+                id = 2,
+                image ="beginners_2",
+                title = "Что такое книга ордеров и как она работает",
+                desc = "Торговля",
+                text = AssetReader.readTextFile(this, "beginner2.txt"),
+                level = "Новичок"
+            ),
+            item(
+                id = 3,
+                image = "beginners_3",
+                title = "Что такое майнинг криптовалюты и как он работает",
+                desc = "Блокчейн",
+                text = AssetReader.readTextFile(this, "beginner3.txt"),
+                level = "Новичок"
+            ),
+            item(
+                id = 4,
+                image = "experienced_1",
+                title = "Что такое фронтраннинг?",
+                desc = "Торговля, DeFi",
+                text = AssetReader.readTextFile(this, "experienced1.txt"),
+                level = "Опытный"
+            ),
+            item(
+                id = 5,
+                image = "experienced_2",
+                title = "Уровни стоп-лосс и тейк-профит и как их определять",
+                desc = "Торговля",
+                text = AssetReader.readTextFile(this, "experienced2.txt"),
+                level = "Опытный"
+            ),
+            item(
+                id = 6,
+                image = "experienced_3",
+                title = "Что такое доступность данных?",
+                desc = "Блокчейн",
+                text = AssetReader.readTextFile(this, "experienced3.txt"),
+                level = "Опытный"
+            ),
+            item(
+                id = 7,
+                image = "advanced_1",
+                title = "Что такое алгоритмическая торговля и как она работает",
+                desc = "Торговля",
+                text = AssetReader.readTextFile(this, "advanced1.txt"),
+                level = "Продвинутый"
+            ),
+            item(
+                id = 8,
+                image = "advanced_2",
+                title = "Распространенные проблемы безопасности в сфере GameFi",
+                desc = "Безопасность",
+                text = AssetReader.readTextFile(this, "advanced2.txt"),
+                level = "Продвинутый"
+            ),
+            item(
+                id = 9,
+                image = "advanced_3",
+                title = "Что такое Taproot и какую пользу он принесет биткоину",
+                desc = "Биткоин, Блокчейн",
+                text = AssetReader.readTextFile(this, "advanced3.txt"),
+                level = "Продвинутый"
+            ),
+
+        )
     }
 }

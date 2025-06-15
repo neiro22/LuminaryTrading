@@ -4,21 +4,15 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.luminarytrading.Adapter.CryptoAdapter
-import com.example.luminarytrading.Adapter.StockAdapter
 import com.example.luminarytrading.Model.CryptoModel
-import com.example.luminarytrading.Model.Model
 import com.example.luminarytrading.databinding.ActivityMainBinding
 import com.example.luminarytrading.R
 
 import android.content.Intent
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.core.view.WindowCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_news -> {
-                    startActivity(Intent(this, NewsActivity::class.java))
+                    startActivity(Intent(this, GiftsActivity::class.java))
                     overridePendingTransition(0, 0)
                     finish()
                     true
