@@ -27,7 +27,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Experience Seampless\n
+        android:text="Experience Seamless\n
 trading and secure\n
 asset menegment"
         android:textStyle="bold"
