@@ -4,12 +4,17 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.luminarytrading.Adapter.CryptoAdapter
 import com.example.luminarytrading.Model.CryptoModel
 import com.example.luminarytrading.databinding.ActivityMainBinding
 import com.example.luminarytrading.R
+import com.example.luminarytrading.viewmodel.CryptoViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 import android.content.Intent
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,6 +22,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: CryptoViewModel by viewModels()
+    private lateinit var cryptoAdapter: CryptoAdapter
     private val lineData = arrayListOf(1000, 1100, 1200, 1100)
     private val lineData2 = arrayListOf(2100, 2000, 1900, 2000)
     private val lineData3 = arrayListOf(900, 1100, 1200, 1000, 1150)
@@ -27,19 +34,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-
-        )
-
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = Color.WHITE
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
-
-        CryptoList()
+        setupWindow()
+        setupRecyclerView()
+        observeViewModel()
+        
+        // Update prices every 30 seconds
+        lifecycleScope.launch {
+            while (true) {
+                viewModel.updatePrices(listOf("bitcoin", "ethereum", "tron"))
+                kotlinx.coroutines.delay(30000)
+            }
+        }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
@@ -66,7 +71,89 @@ class MainActivity : AppCompatActivity() {
         }
 
         //StockList()
+    }
 
+    private fun setupWindow() {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = Color.WHITE
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+    }
+
+    private fun setupRecyclerView() {
+        cryptoAdapter = CryptoAdapter(ArrayList())
+        binding.cryptoView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = cryptoAdapter
+        }
+    }
+
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            viewModel.cryptoPrices.collectLatest { prices ->
+                val cryptoList = prices.map { (id, price) ->
+                    CryptoModel(
+                        name = when(id) {
+                            "bitcoin" -> "Bitcoin"
+                            "ethereum" -> "Ethereum"
+                            "tron" -> "Tron"
+                            else -> id
+                        },
+                        symbol = when(id) {
+                            "bitcoin" -> "BTC/USDT"
+                            "ethereum" -> "ETH/USDT"
+                            "tron" -> "TRX/USDT"
+                            else -> "$id/USDT"
+                        },
+                        price = price,
+                        changePercent = 0.0, // You can add 24h change from the API response
+                        lineData = ArrayList(), // You can add historical data if needed
+                        propertyAmount = viewModel.getCryptoBalance(id),
+                        propertySize = viewModel.getCryptoBalance(id),
+                        SellPrice1 = price * 1.001,
+                        SellPrice2 = price * 1.002,
+                        SellPrice3 = price * 1.003,
+                        SellPrice4 = price * 1.004,
+                        SellAmount1 = 0.1,
+                        SellAmount2 = 0.2,
+                        SellAmount3 = 0.15,
+                        SellAmount4 = 0.05,
+                        BuyPrice1 = price * 0.999,
+                        BuyPrice2 = price * 0.998,
+                        BuyPrice3 = price * 0.997,
+                        BuyPrice4 = price * 0.996,
+                        BuyPrice5 = price * 0.995,
+                        BuyPrice6 = price * 0.994,
+                        BuyPrice7 = price * 0.993,
+                        BuyAmount1 = 0.3,
+                        BuyAmount2 = 0.25,
+                        BuyAmount3 = 0.2,
+                        BuyAmount4 = 0.15,
+                        BuyAmount5 = 0.1,
+                        BuyAmount6 = 0.05,
+                        BuyAmount7 = 0.03,
+                        Open = price,
+                        Close = price,
+                        High = price * 1.01,
+                        Low = price * 0.99,
+                        DailyChange = 0.0,
+                        DailyVol = 0.0,
+                        SymbolLogo = id
+                    )
+                }
+                cryptoAdapter.updateData(cryptoList)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.portfolioValue.collectLatest { value ->
+                binding.portfolioValue.text = "$${String.format("%.2f", value)}"
+            }
+        }
     }
 
 //    private fun StockList() {
@@ -80,46 +167,4 @@ class MainActivity : AppCompatActivity() {
 //
 //        binding.stockView.adapter = StockAdapter(domainArrayList)
 //    }
-
-    private fun CryptoList() {
-        binding.cryptoView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        val domainArrayList = arrayListOf(
-            CryptoModel(
-                "Bitcoin", "BTC/USDT", 67890.12, 2.56,
-                arrayListOf(45000, 47000, 49000, 51000, 53000, 55000, 57000),
-                1.5, 101835.18,
-                68000.0, 68100.0, 68200.0, 68300.0,
-                0.1, 0.2, 0.15, 0.05,
-                67850.0, 67700.0, 67550.0, 67400.0, 67250.0, 67100.0, 67000.0,
-                0.3, 0.25, 0.2, 0.15, 0.1, 0.05, 0.03,
-                66000.0, 67890.12, 68500.0, 65500.0, 1890.12, 12000.0,
-                "bitcoin"
-            ),
-            CryptoModel(
-                "Ethereum", "ETH/USDT", 3500.75, -1.34,
-                arrayListOf(3200, 3300, 3400, 3600, 3550, 3500, 3450),
-                10.0, 35007.5,
-                3510.0, 3520.0, 3530.0, 3540.0,
-                1.0, 1.5, 2.0, 0.5,
-                3490.0, 3480.0, 3470.0, 3460.0, 3450.0, 3440.0, 3430.0,
-                2.5, 2.0, 1.8, 1.2, 0.9, 0.6, 0.3,
-                3600.0, 3500.75, 3620.0, 3480.0, -99.25, 8000.0,
-                "ethereum"
-            ),
-            CryptoModel(
-                "Tron", "TRX", 0.1234, 0.87,
-                arrayListOf(110, 115, 120, 122, 124, 125, 127),
-                5000.0, 617.0,
-                0.1240, 0.1250, 0.1260, 0.1270,
-                1000.0, 800.0, 600.0, 400.0,
-                0.1230, 0.1225, 0.1220, 0.1215, 0.1210, 0.1205, 0.1200,
-                1200.0, 1100.0, 1000.0, 900.0, 800.0, 700.0, 600.0,
-                0.12, 0.1234, 0.125, 0.118, 0.0034, 30000000.0,
-                "tron"
-            )
-        )
-        binding.cryptoView.adapter = CryptoAdapter(domainArrayList)
-
-    }
 }
