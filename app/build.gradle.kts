@@ -39,22 +39,18 @@ android {
         dataBinding = true
         viewBinding = true
     }
+}
 
-    configurations.all {
-        resolutionStrategy {
-            // Force a specific version of annotations to resolve conflicts
-            force("org.jetbrains:annotations:23.0.0")
-        }
+configurations {
+    all {
+        exclude(group = "com.intellij", module = "annotations")
+        exclude(group = "org.jetbrains", module = "annotations")
     }
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx) {
-        exclude(group = "com.intellij", module = "annotations")
-    }
-    implementation(libs.androidx.appcompat) {
-        exclude(group = "com.intellij", module = "annotations")
-    }
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
@@ -62,9 +58,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation("com.github.majorkik:SparkLineLayout:1.0.1") {
-        exclude(group = "com.intellij", module = "annotations")
-    }
+    implementation("com.github.majorkik:SparkLineLayout:1.0.1")
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.google.android.material:material:1.12.0") // последняя на июнь 2025
 
@@ -85,7 +79,4 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
-
-    // Use a single version of JetBrains annotations
-    implementation("org.jetbrains:annotations:23.0.0")
 }
