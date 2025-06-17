@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.example.luminarytrading"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.luminarytrading"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -75,8 +75,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     
-    // Room for database
+    // Room with updated version
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
+    
+    // Add kotlinx-metadata-jvm to fix version mismatch
+    implementation("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0")
 }
