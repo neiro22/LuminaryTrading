@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Source video for screenshots — keep only generated PNGs
+screenshots/*.mkv
+screenshots/*.mp4
+screenshots/*.mov
