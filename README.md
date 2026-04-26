@@ -247,7 +247,7 @@ GET https://api.coingecko.com/api/v3/simple/price
 
 ## Автор
 
-**Egor Neiro** — Android Developer
+**Egor Rzhechkovskij**
 
 - GitHub: [@neiro22](https://github.com/neiro22)
 
